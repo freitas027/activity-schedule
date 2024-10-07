@@ -1,0 +1,8 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": ["**/*.schedule.json"],
+            "url": "./schedule.schema.json"
+        }
+    ]
+}

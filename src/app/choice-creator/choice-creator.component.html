@@ -1,0 +1,15 @@
+<div class="flex flex-col gap-4">
+    <app-choice [choice]="{prompt: 'Name', type: 'string'}" [(value)]="name"></app-choice>
+    <app-choice [choice]="{prompt: 'Prompt', type: 'string'}" [(value)]="prompt"></app-choice>
+    <app-choice [choice]="typeChoice" [(value)]="selectedChoiceType"></app-choice>
+
+    @if(selectedChoiceType === 'enum'){
+        <app-choice [choice]="optionChoice" (keyEvent)="onOptionKey($event)"></app-choice>
+        <div class="flex flex-wrap gap-1">
+            @for (option of optionsToCreate(); track $index) {
+                <span class="badge">{{option}}</span>
+            }
+        </div>
+    }
+    <button class="btn max-w-32" (click)="create()">Create</button>
+</div>

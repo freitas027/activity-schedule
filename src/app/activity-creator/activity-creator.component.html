@@ -1,0 +1,58 @@
+<div class="flex w-full flex-col">
+    <article class="prose mb-2">
+        <h2>Add new choices</h2>
+    </article>
+    <label class="input input-bordered max-h-8 flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          class="h-4 w-4 opacity-70">
+          <path
+            fill-rule="evenodd"
+            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+            clip-rule="evenodd" />
+        </svg>
+        <input type="text" class="grow" placeholder="Search in table" />
+      </label>
+    <div class="overflow-x-auto">
+        <table class="table cursor-pointer">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Prompt</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+             @for (choice of availableChoices(); track $index) {
+                <tr [class.bg-base-200]="$index === selectedChoiceRow" (click)="selectedChoiceRow = $index">
+                    <th>{{$index+1}}</th>
+                    <td>{{choice.name}}</td>
+                    <td>{{choice.prompt}}</td>
+                    <td>{{choice.type}}</td>
+                </tr>
+             }
+          </tbody>
+        </table>
+      </div>
+    <button class="btn mt-4" (click)="addChoice($event)">Add</button>
+    <div class="divider"></div>
+    <article class="prose">
+        <h2>Preview</h2>
+    </article>
+    @for (choice of addedChoices(); track $index) {
+        <div class="flex">
+            <app-choice [choice]="choice" class="grow"></app-choice>
+            <label class="ml-4 mb-1 p-2 rounded-sm swap self-end bg-base-200">
+                <input type="checkbox" />
+                <div class="swap-off">No Default</div>
+                <div class="swap-on">With Default</div>
+            </label>
+        </div>
+    }
+    <div class="divider"></div>
+    <button class="btn mt-4 mb-4">Save</button>
+  </div>

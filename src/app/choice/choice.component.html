@@ -1,0 +1,30 @@
+<article class="prose mb-2 mt-2">
+    @if(choice()?.prompt){
+        <h2>{{choice()?.prompt}}</h2>
+    } @else {
+        <h2>Prompt</h2>
+    }
+</article>
+@switch (choice()?.type) {
+    @case ("enum") {
+        <select class="select select-bordered w-full" name="options" [(ngModel)]="value">
+            @for (option of choice()?.options ?? []; track $index) {
+                <option value="{{option}}">
+                    {{option}}
+                </option>
+            }
+        </select>
+    }
+    @case ("password") {
+        <input type="password" class="input input-bordered w-full" [(ngModel)]="value">
+    }
+    @case ("file"){
+        <input type="file" class="file-input w-full max-w-xs" [(ngModel)]="value"/>
+    }
+    @case ("date"){
+        <input type="date" class="w-full max-w-xs input input-bordered" [(ngModel)]="value">
+    }
+    @case ("string") {
+        <input type="text" class="w-full  input input-bordered" (keyup)="keyEvent.emit($event)" [(ngModel)]="value">
+    }
+}

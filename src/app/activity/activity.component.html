@@ -1,0 +1,12 @@
+
+@for (choice of choices(); track $index) {
+
+    <div class="flex" draggable="true" id="{{$index}}" (dragstart)="dragStart($event)" (drop)="onDrop($event, $index)" (dragover)="onDropOver($event)">
+        <div class="self-center pr-4 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+        </div>
+        <app-choice [choice]="choice" class="w-full"></app-choice>
+    </div>
+}
+
+<button class="btn w-full max-w-32 mt-4 ml-[48px]">Run</button>
